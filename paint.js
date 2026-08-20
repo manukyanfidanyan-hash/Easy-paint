@@ -244,10 +244,10 @@ class Square {
       c.lineWidth = this.linewidth;
       c.roundRect(this.pos.x, this.pos.y, this.pos2.x - this.pos.x, this.pos2.y - this.pos.y, this.radius);
       c.closePath();
-      c.stroke();
       if (mySquareChecker2 == true) {
          c.fill();
       }
+      c.stroke();
    }
    update () {
       if (mySquareChecker == true) {
