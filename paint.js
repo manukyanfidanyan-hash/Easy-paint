@@ -1,0 +1,378 @@
+const canvas = document.querySelector("canvas");
+let c = canvas.getContext("2d");
+
+canvas.width = window.innerWidth / 1.5;
+canvas.height = window.innerHeight / 1.5;
+
+canvas.style.color = '#000000';
+
+// ! first part // -----------------------------------------------------------------------------------)
+let myDrawChecker = false;
+let myLineChecker = false;
+let myRetinChecker = false;
+let firstLine = false;
+let mySquareChecker = false;
+let mySquareChecker2 = false;
+
+let linePos1x = 0;
+let linePos1y = 0;
+
+let linePos2x = 0;
+let linePos2y = 0;
+
+let squarePos1x = 0;
+let squarePos1y = 0;
+
+let squarePos2x = 0;
+let squarePos2y = 0;
+
+canvas.addEventListener("mousemove", (e) => {
+   cursor.pos.x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+   cursor.pos.y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+   setTimeout(() => {
+      cursor.pos2.x1 = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      cursor.pos2.y1 = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }, 1);
+
+   if (myLineChecker == true) {
+      linePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+
+   if (myRetinChecker == true) {
+      retin.pos.x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      retin.pos.y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+
+   if (mySquareChecker == true) {
+      squarePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+});
+
+document.addEventListener("mousedown", (e) => {
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'pencil') {
+      myDrawChecker = true;
+   }
+});
+
+canvas.addEventListener("mousedown", (e) => {
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'line') {
+      myLineChecker = true;
+
+      linePos1x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos1y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      linePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'retin') {
+      myRetinChecker = true;
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'square' || document.getElementById("pencil").value == 'square2') {
+      square.radius = 0;
+      mySquareChecker = true;
+
+      squarePos1x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos1y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      squarePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'square2') {
+      mySquareChecker2 = true;
+   }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'circle' || document.getElementById("pencil").value == 'circle2') {
+      square.radius = 1000000000000;
+      mySquareChecker = true;
+
+      squarePos1x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos1y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      squarePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'circle2') {
+      mySquareChecker2 = true;
+   }
+});
+
+document.addEventListener("mouseup", (e) => {
+   setTimeout(() => {
+      myDrawChecker = false;
+      myLineChecker = false;
+      myRetinChecker = false;
+      mySquareChecker = false;
+      mySquareChecker2 = false;
+   }, 1);
+});
+
+canvas.addEventListener("mouseup", () => {
+   if (myLineChecker == true) {
+      line.draw();
+   }
+
+   if (mySquareChecker == true) {
+      square.draw();
+   }
+});
+
+class Background {
+   constructor() {
+      this.width = canvas.width;
+      this.height = canvas.height;
+      this.pos = {
+         x: 0,
+         y: 0
+      }
+      this.color = '#dddddd';
+   }
+   draw () {
+      c.beginPath();
+      c.fillStyle = this.color;
+      c.fillRect(0, 0, this.width, this.height);
+      c.fill();
+   }
+}
+
+class Cursor {
+   constructor() {
+      this.width = 10;
+      this.height = 10;
+      this.pos = {
+         x: 0,
+         y: 0
+      }
+      this.pos2 = {
+         x1: 0,
+         y1: 0
+      }
+      this.linewidth = 1;
+      this.radius = 1000;
+      this.color = '#000000';
+   }
+   draw () {
+      c.beginPath();
+      c.strokeStyle = this.color;
+      c.lineWidth = this.linewidth;
+      c.moveTo(this.pos.x, this.pos.y);
+      c.lineTo(this.pos2.x1, this.pos2.y1);
+      c.stroke();
+   }
+   update () {
+      if (myDrawChecker) {
+         this.draw();
+      }
+      // @ts-ignore
+      this.color = document.getElementById("color").value;
+      // @ts-ignore
+      this.linewidth = document.getElementById("lineWidth").value;
+   }
+}
+
+class Line {
+   constructor() {
+      this.pos = {
+         x: linePos1x,
+         y: linePos2y
+      }
+      this.pos2 = {
+         x1: linePos2x,
+         y1: linePos2y
+      }
+      this.linewidth = 1;
+      this.color = '#000000';
+   }
+   draw () {
+      c.beginPath();
+      c.strokeStyle = this.color;
+      c.lineWidth = this.linewidth;
+      c.moveTo(this.pos.x, this.pos.y);
+      c.lineTo(this.pos2.x1, this.pos2.y1);
+      c.closePath();
+      c.stroke();
+   }
+   update () {
+
+      if (myLineChecker == true) {
+         this.pos.x = linePos1x;
+         this.pos.y = linePos1y;
+
+         this.pos2.x1 = linePos2x;
+         this.pos2.y1 = linePos2y;
+      }
+
+      // @ts-ignore
+      this.color = document.getElementById("color").value;
+      // @ts-ignore
+      this.linewidth = document.getElementById("lineWidth").value;
+   }
+}
+
+class Square {
+   constructor() {
+      this.pos = {
+         x: squarePos1x,
+         y: squarePos1y
+      }
+      this.pos2 = {
+         x: squarePos2x,
+         y: squarePos2y
+      }
+      this.linewidth = 1;
+      this.radius = 0;
+      this.color = '#000000';
+      this.color2 = '#dddddd';
+   }
+   draw () {
+      c.beginPath();
+      c.strokeStyle = this.color;
+      c.fillStyle = this.color2;
+      c.lineWidth = this.linewidth;
+      c.roundRect(this.pos.x, this.pos.y, this.pos2.x - this.pos.x, this.pos2.y - this.pos.y, this.radius);
+      c.closePath();
+      c.stroke();
+      if (mySquareChecker2 == true) {
+         c.fill();
+      }
+   }
+   update () {
+      if (mySquareChecker == true) {
+         this.pos.x = squarePos1x;
+         this.pos.y = squarePos1y;
+
+         this.pos2.x = squarePos2x;
+         this.pos2.y = squarePos2y;
+      }
+
+      // @ts-ignore
+      this.color = document.getElementById("color").value;
+
+      // @ts-ignore
+      this.color2 = document.getElementById("color2").value;
+      
+      // @ts-ignore
+      this.linewidth = document.getElementById("lineWidth").value;
+   }
+}
+
+class Retin {
+   constructor() {
+      this.width = 10;
+      this.height = 10;
+      this.pos = {
+         x: 0,
+         y: 0
+      }
+      this.pos2 = {
+         x1: 0,
+         y1: 0
+      }
+      this.linewidth = 7.5;
+      this.color = '#dddddd';
+   }
+   draw () {
+      c.beginPath();
+      c.strokeStyle = this.color;
+      c.fillStyle = this.color;
+      c.lineWidth = this.linewidth;
+      c.arc(this.pos.x, this.pos.y, this.linewidth, 0, 2 * Math.PI);
+      c.stroke();
+      c.fill();
+   }
+   update () {
+      if (myRetinChecker) {
+         this.draw();
+      }
+   }
+}
+
+let background = new Background();
+background.draw();
+
+let cursor = new Cursor();
+let line = new Line();
+let square = new Square();
+let retin = new Retin();
+
+function infinity_cursor() {
+   requestAnimationFrame(infinity_cursor);
+   cursor.update();
+   line.update();
+   square.update();
+   retin.update();
+}
+
+infinity_cursor();
+
+function clear1() {
+   myDrawChecker = false;
+   c.clearRect(0, 0, window.innerWidth, window.innerHeight);
+   c.clearRect(0, 0, window.innerWidth, window.innerHeight);
+   background.draw();
+}
+
+// * // ----------------------------------------------------------------------------------------------------------------------------------------------------)
+function install() {
+   let time;
+
+   time = new Intl.DateTimeFormat('arm-AM', {
+      timeZone: 'Asia/Yerevan',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+   }).format(new Date());
+
+   let namevar = window.prompt("Enter image name");
+   while (namevar == '') {
+      namevar = window.prompt("Enter image name");
+   }
+
+   if (namevar != null) {
+      const imageURL = canvas.toDataURL('image/png');
+
+      const link = document.createElement('a');
+      link.href = imageURL;
+    
+      link.download = `(${time}), ${namevar}.png`;
+    
+      link.click();
+   }
+}
+
+let file;
+document.getElementById("addImage").addEventListener("change", (e) => {
+   // @ts-ignore
+   file = e.target.files[0]; 
+
+   if (file) {
+      const url_ = URL.createObjectURL(file);
+      const img_ = new Image();
+
+      img_.onload = () => {
+         c.clearRect(0, 0, window.innerWidth, window.innerHeight);
+         c.drawImage(img_, 0, 0, canvas.width, canvas.height);
+         URL.revokeObjectURL(url_);
+      }
+
+      img_.src = url_;
+   }
+});
+
+window.addEventListener("beforeunload", (e) => {
+   e.preventDefault();
+   e.returnValue = ''; 
+});

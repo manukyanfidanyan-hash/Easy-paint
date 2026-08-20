@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbdh5y6_Xvk2WVeSo1dp6cYui1u-DLpbhemHQ8442ykQ&s=10">
+   <title>Easy Paint - app for drawing</title>
+   <meta name="description" content="Easy Paint — app for paint">
+</head>
+<body>
+   
+   <canvas></canvas>
+
+   <input id="color" value="#000000" type="color"/>
+   <input id="color2" value="#dddddd" type="color"/>
+
+   <select name="pencil" id="pencil">
+      <option value="pencil">pencil: 🖍</option>
+
+      <option value="line">line: —</option>
+
+      <option value="square">square without middle: 🔳</option>
+      <option value="square2">square: ⬜</option>
+
+      <option value="circle">circle without middle: ⭕</option>
+      <option value="circle2">circle: 🔴</option>
+
+      <option value="retin">eraser: ●</option>
+<!--
+      <option value="filling">filling: ?</option>
+-->
+   </select>
+
+   <select name="lineWidth" id="lineWidth">
+      <option value="1">Line width: 1</option>
+      <option value="2">Line width: 2</option>
+      <option value="3">Line width: 3</option>
+      <option value="4">Line width: 4</option>
+      <option value="5">Line width: 5</option>
+   </select>
+
+   <button onclick="clear1()" id="clearBtn">clean all 🗑</button>
+
+   <input type="file" accept="image/*" id="addImage"/>
+
+   <button onclick="install()" id="saveBtn">Save 📥</button>
+
+<!-- -CSS & JS- -->
+   <link rel="stylesheet" href="paint.css"/>
+   <script src="paint.js" defer></script>
+</body>
+</html>

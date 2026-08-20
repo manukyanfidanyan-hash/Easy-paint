@@ -1,0 +1,106 @@
+body{
+   margin: 0;
+   background-color: #444444;
+   color: #222222;
+
+   cursor: default;
+}
+
+canvas{
+   background-color: #000000;
+   border: 10px solid #aaaaaa;
+
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translateX(-50%) translateY(-50%);
+
+   cursor: crosshair;
+}
+
+#color{
+   position: absolute;
+   top: 20%;
+   left: 8%;
+   transform: translateX(-50%) translateY(-50%);
+
+   background-color: #ffffff00;
+   border-radius: 5px;
+   border: 2px solid #808080;
+
+   width: 235px;
+
+   cursor: pointer;
+}
+
+#color2{
+   position: absolute;
+   top: 25%;
+   left: 8%;
+   transform: translateX(-50%) translateY(-50%);
+
+   background-color: #ffffff00;
+   border-radius: 5px;
+   border: 2px solid #808080;
+
+   width: 235px;
+
+   cursor: pointer;
+}
+
+#clearBtn{
+   position: absolute;
+   top: 90%;
+   left: 8%;
+   transform: translateX(-50%) translateY(-50%);
+
+   cursor: pointer;
+}
+
+#lineWidth{
+
+   background-color: #dddddd;
+   color: #222222;
+
+   position: absolute;
+   top: 40%;
+   left: 8%;
+   transform: translateX(-50%) translateY(-50%);
+
+   cursor: pointer;
+}
+
+option{
+   font-size: 1rem;
+}
+
+#saveBtn{
+   position: absolute;
+   top: 0%;
+   left: 100%;
+   transform: translateX(-100%) translateY(0%);
+
+   width: 70px;
+}
+
+#pencil{
+   background-color: #dddddd;
+   color: #222222;
+
+   position: absolute;
+   top: 10%;
+   left: 8%;
+   transform: translateX(-50%) translateY(-50%);
+
+   cursor: pointer;
+}
+
+#addImage{
+   background-color: #dddddd;
+   color: #222222;
+
+   position: absolute;
+   top: 0%;
+   left: 0%;
+   transform: translateX(0%) translateY(0%);
+}
