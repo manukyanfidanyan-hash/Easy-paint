@@ -68,6 +68,8 @@ canvas.addEventListener("mousedown", (e) => {
   
       linePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
       linePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+      line.draw();
    }
 
    // @ts-ignore
@@ -131,12 +133,24 @@ document.addEventListener("mouseup", (e) => {
    }, 1);
 });
 
-canvas.addEventListener("mouseup", () => {
+canvas.addEventListener("mouseup", (e) => {
    if (myLineChecker == true) {
+      linePos1x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos1y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      linePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
       line.draw();
    }
 
    if (mySquareChecker == true) {
+      squarePos1x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos1y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      squarePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
       square.draw();
    }
 });
@@ -425,4 +439,8 @@ document.getElementById("addImage").addEventListener("change", (e) => {
 window.addEventListener("beforeunload", (e) => {
    e.preventDefault();
    e.returnValue = ''; 
+});
+
+document.addEventListener('contextmenu', (e) => {
+   e.preventDefault();
 });
