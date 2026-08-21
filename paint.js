@@ -72,6 +72,9 @@ canvas.addEventListener("mousedown", (e) => {
 
    // @ts-ignore
    if (document.getElementById("pencil").value == 'retin') {
+      retin.pos.x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      retin.pos.y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
       myRetinChecker = true;
    }
 
@@ -107,6 +110,14 @@ canvas.addEventListener("mousedown", (e) => {
    // @ts-ignore
    if (document.getElementById("pencil").value == 'circle2') {
       mySquareChecker2 = true;
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'text') {
+      text.pos.x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      text.pos.y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+      text.draw();
    }
 });
 
@@ -277,10 +288,6 @@ class Retin {
          x: 0,
          y: 0
       }
-      this.pos2 = {
-         x1: 0,
-         y1: 0
-      }
       this.linewidth = 7.5;
       this.color = '#dddddd';
    }
@@ -300,12 +307,44 @@ class Retin {
    }
 }
 
+class Text_ {
+   constructor() {
+      // ? super();
+      this.textInp = '';
+      this.color = '#000000';
+      this.font = `${1}rem sans-serif`;
+      this.pos = {
+         x: 10,
+         y: 10
+      }
+   }
+   draw () {
+      c.beginPath();
+      c.fillStyle = this.color;
+      c.font = this.font;
+      c.textAlign = 'center';
+      c.textBaseline = 'middle';
+      c.fillText(this.textInp, this.pos.x, this.pos.y);
+   }
+   update () {
+      // @ts-ignore
+      text.textInp = document.getElementById("text").value;
+
+      // @ts-ignore
+      this.color = document.getElementById("color").value;
+      
+      // @ts-ignore
+      this.font = `${document.getElementById("lineWidth").value}rem sans-serif`;
+   }
+}
+
 let background = new Background();
 background.draw();
 
 let cursor = new Cursor();
 let line = new Line();
 let square = new Square();
+let text = new Text_();
 let retin = new Retin();
 
 function infinity_cursor() {
@@ -313,6 +352,7 @@ function infinity_cursor() {
    cursor.update();
    line.update();
    square.update();
+   text.update();
    retin.update();
 }
 
@@ -323,6 +363,16 @@ function clear1() {
    c.clearRect(0, 0, window.innerWidth, window.innerHeight);
    c.clearRect(0, 0, window.innerWidth, window.innerHeight);
    background.draw();
+}
+
+function textF () {
+   // @ts-ignore
+   text.textInp = document.getElementById("text").value;
+}
+
+function select() {
+   // @ts-ignore
+   document.getElementById("text").select();
 }
 
 // * // ----------------------------------------------------------------------------------------------------------------------------------------------------)
