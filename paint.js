@@ -44,11 +44,12 @@ canvas.addEventListener("mousemove", (e) => {
       retin.pos.x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
       retin.pos.y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
    }
-
+   // @ts-ignore
    if (mySquareChecker == true) {
       squarePos2x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
       squarePos2y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
    }
+
 });
 
 document.addEventListener("mousedown", (e) => {
@@ -154,6 +155,35 @@ canvas.addEventListener("mouseup", (e) => {
       square.draw();
    }
 });
+
+function seeText_and_seSsquareSquare () {
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'text') {
+      document.getElementById("text").style.display = 'block';
+   }
+   else {
+      document.getElementById("text").style.display = 'none';
+      // @ts-ignore
+      document.getElementById("text").value = '';
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'square' ||
+      // @ts-ignore
+      document.getElementById("pencil").value == 'square2' ||
+      // @ts-ignore
+      document.getElementById("pencil").value == 'circle' ||
+      // @ts-ignore
+      document.getElementById("pencil").value == 'circle2'
+   ) {
+      document.getElementById("inpText").style.display = 'block';
+      document.getElementById("square_square").style.display = 'block';
+   }
+   else {
+      document.getElementById("inpText").style.display = 'none';
+      document.getElementById("square_square").style.display = 'none';
+   }
+}
 
 class Background {
    constructor() {
@@ -267,12 +297,25 @@ class Square {
       c.strokeStyle = this.color;
       c.fillStyle = this.color2;
       c.lineWidth = this.linewidth;
-      c.roundRect(this.pos.x, this.pos.y, this.pos2.x - this.pos.x, this.pos2.y - this.pos.y, this.radius);
+      // @ts-ignore
+      if (!document.getElementById("square_square").checked) {
+         c.roundRect(this.pos.x, this.pos.y, this.pos2.x - this.pos.x, this.pos2.y - this.pos.y, this.radius);
+      }
+      // @ts-ignore
+      else if (document.getElementById("square_square").checked) {
+         c.roundRect(this.pos.x, this.pos.y,
+         Math.max(this.pos2.x  - this.pos.x, this.pos2.y  - this.pos.y),
+         Math.max(this.pos2.x  - this.pos.x, this.pos2.y  - this.pos.y),
+         this.radius);
+      }
       c.closePath();
       if (mySquareChecker2 == true) {
          c.fill();
       }
       c.stroke();
+   }
+   remove () {
+      c.clearRect(this.pos.x, this.pos.y, this.pos2.x - this.pos.x, this.pos2.y - this.pos.y);
    }
    update () {
       if (mySquareChecker == true) {

@@ -117,4 +117,26 @@ option{
    top: 5%;
    left: 50%;
    transform: translateX(-50%) translateY(-50%);
+
+   display: none;
+}
+
+#square_square{
+   position: absolute;
+   top: 5%;
+   left: 35%;
+   transform: translateX(-50%) translateY(-50%);
+
+   cursor: pointer;
+   display: none;
+}
+
+#inpText{
+   color: #dddddd;
+   position: absolute;
+   top: 2.5%;
+   left: 27%;
+   transform: translateX(-50%) translateY(-50%);
+
+   display: none;
 }
