@@ -7,8 +7,8 @@ body{
 }
 
 canvas{
-   background-color: #000000;
-   border: 10px solid #aaaaaa;
+   background-image: linear-gradient(135deg,#555555,#aaaaaa, #555555, #aaaaaa, #555555, #aaaaaa, #555555, #aaaaaa, #555555,#aaaaaa, #555555);
+   border: 10px solid #cccccc;
 
    position: absolute;
    top: 50%;
@@ -139,4 +139,12 @@ option{
    transform: translateX(-50%) translateY(-50%);
 
    display: none;
+}
+
+#FullscreenBtn{
+   color: #222222;
+   position: absolute;
+   top: 90%;
+   left: 50%;
+   transform: translateX(-50%) translateY(-50%);
 }

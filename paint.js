@@ -199,6 +199,10 @@ function seeText_and_seeSquareSquare () {
    }
 }
 
+function Fullscreen() {
+   document.documentElement.requestFullscreen();
+}
+
 class Background {
    constructor() {
       this.width = canvas.width;
