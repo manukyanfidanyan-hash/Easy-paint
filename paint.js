@@ -26,6 +26,20 @@ let squarePos1y = 0;
 let squarePos2x = 0;
 let squarePos2y = 0;
 
+document.addEventListener("keydown", (e) => {
+   if (e.key === 'Shift') {
+      // @ts-ignore
+      document.getElementById("square_square").checked = true;
+   }
+});
+
+document.addEventListener("keyup", (e) => {
+   if (e.key === 'Shift') {
+      // @ts-ignore
+      document.getElementById("square_square").checked = false;
+   }
+});
+
 canvas.addEventListener("mousemove", (e) => {
    cursor.pos.x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
    cursor.pos.y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
@@ -156,7 +170,7 @@ canvas.addEventListener("mouseup", (e) => {
    }
 });
 
-function seeText_and_seSsquareSquare () {
+function seeText_and_seeSquareSquare () {
    // @ts-ignore
    if (document.getElementById("pencil").value == 'text') {
       document.getElementById("text").style.display = 'block';
@@ -291,12 +305,29 @@ class Square {
       this.radius = 0;
       this.color = '#000000';
       this.color2 = '#dddddd';
+
+      this.Xcheacker = false;
+      this.Ycheacker = false;
    }
    draw () {
       c.beginPath();
       c.strokeStyle = this.color;
       c.fillStyle = this.color2;
       c.lineWidth = this.linewidth;
+
+      if (this.pos2.x - this.pos.x > 0) {
+         this.Xcheacker = true;
+      }
+      if (this.pos2.x - this.pos.x < 0) {
+         this.Xcheacker = false;
+      }
+
+      if (this.pos2.y - this.pos.y > 0) {
+         this.Ycheacker = true;
+      }
+      if (this.pos2.y - this.pos.y < 0) {
+         this.Ycheacker = false;
+      }
       // @ts-ignore
       if (!document.getElementById("square_square").checked) {
          c.roundRect(this.pos.x, this.pos.y, this.pos2.x - this.pos.x, this.pos2.y - this.pos.y, this.radius);
@@ -304,8 +335,11 @@ class Square {
       // @ts-ignore
       else if (document.getElementById("square_square").checked) {
          c.roundRect(this.pos.x, this.pos.y,
-         Math.max(this.pos2.x  - this.pos.x, this.pos2.y  - this.pos.y),
-         Math.max(this.pos2.x  - this.pos.x, this.pos2.y  - this.pos.y),
+
+         this.Xcheacker && this.Ycheacker ? Math.max(this.pos2.x  - this.pos.x, this.pos2.y  - this.pos.y): Math.min(this.pos2.x  - this.pos.x, this.pos2.y  - this.pos.y),
+
+         this.Xcheacker && this.Ycheacker ? Math.max(this.pos2.x  - this.pos.x, this.pos2.y  - this.pos.y): Math.min(this.pos2.x  - this.pos.x, this.pos2.y  - this.pos.y),
+         
          this.radius);
       }
       c.closePath();
