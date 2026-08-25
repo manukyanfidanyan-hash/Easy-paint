@@ -4,8 +4,12 @@ let c = canvas.getContext("2d");
 canvas.width = window.innerWidth / 1.5;
 canvas.height = window.innerHeight / 1.5;
 
-canvas.style.color = '#000000';
+window.addEventListener("resize", () => {
+   canvas.width = window.innerWidth / 1.5;
+   canvas.height = window.innerHeight / 1.5;
 
+   background.draw();
+});
 // ! first part // -----------------------------------------------------------------------------------)
 let myDrawChecker = false;
 let myLineChecker = false;

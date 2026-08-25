@@ -28,7 +28,7 @@ canvas{
    border-radius: 5px;
    border: 2px solid #808080;
 
-   width: 235px;
+   width: 15vw;
 
    cursor: pointer;
 }
@@ -43,7 +43,7 @@ canvas{
    border-radius: 5px;
    border: 2px solid #808080;
 
-   width: 235px;
+   width: 15vw;
 
    cursor: pointer;
 }
@@ -58,7 +58,6 @@ canvas{
 }
 
 #lineWidth{
-
    background-color: #dddddd;
    color: #222222;
 
@@ -91,6 +90,8 @@ option{
    top: 10%;
    left: 8%;
    transform: translateX(-50%) translateY(-50%);
+
+   width: 10vw;
 
    cursor: pointer;
 }
