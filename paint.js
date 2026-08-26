@@ -472,13 +472,17 @@ function select() {
 
 // * // ----------------------------------------------------------------------------------------------------------------------------------------------------)
 let namevar = '';
+let toUnderstandSpaces = '';
+// @ts-ignore
 let timeout1;
 
 function toHaveImageName() {
    // @ts-ignore
    namevar = document.getElementById("imageName").value;
 
-   if (namevar != '') {
+   toUnderstandSpaces = namevar.split(" ").join("");
+
+   if (toUnderstandSpaces != '') {
       document.getElementById("imageName").style.display = 'none';
       document.getElementById("canselBtn").style.display = 'none';
       document.getElementById("agreeBtnForImageName").style.display = 'none';
@@ -501,10 +505,12 @@ function toHaveImageName() {
     
       link.click();
    }
-
-   if (namevar == '') {
+   else {
+      // @ts-ignore
       clearTimeout(timeout1);
       document.getElementById("imageName").style.borderColor = '#ff0000';
+      // @ts-ignore
+      document.getElementById("imageName").value = '';
       timeout1 = setTimeout(() => {
          document.getElementById("imageName").style.borderColor = '#dddddd';
       }, 1000);
