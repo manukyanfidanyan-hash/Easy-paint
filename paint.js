@@ -3,13 +3,6 @@ let c = canvas.getContext("2d");
 
 canvas.width = window.innerWidth / 1.5;
 canvas.height = window.innerHeight / 1.5;
-
-window.addEventListener("resize", () => {
-   canvas.width = window.innerWidth / 1.5;
-   canvas.height = window.innerHeight / 1.5;
-
-   background.draw();
-});
 // ! first part // -----------------------------------------------------------------------------------)
 let myDrawChecker = false;
 let myLineChecker = false;
