@@ -312,6 +312,8 @@ class Square {
    }
    draw () {
       c.beginPath();
+      c.save();
+      c.rotate(0);
       c.strokeStyle = this.color;
       c.fillStyle = this.color2;
       c.lineWidth = this.linewidth;
@@ -344,6 +346,7 @@ class Square {
          this.radius);
       }
       c.closePath();
+      c.restore();
       if (mySquareChecker2 == true) {
          c.fill();
       }
@@ -468,22 +471,27 @@ function select() {
 }
 
 // * // ----------------------------------------------------------------------------------------------------------------------------------------------------)
-function install() {
-   let time;
+let namevar = '';
+let timeout1;
 
-   time = new Intl.DateTimeFormat('arm-AM', {
-      timeZone: 'Asia/Yerevan',
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-   }).format(new Date());
+function toHaveImageName() {
+   // @ts-ignore
+   namevar = document.getElementById("imageName").value;
 
-   let namevar = window.prompt("Enter image name");
-   while (namevar == '') {
-      namevar = window.prompt("Enter image name");
-   }
+   if (namevar != '') {
+      document.getElementById("imageName").style.display = 'none';
+      document.getElementById("canselBtn").style.display = 'none';
+      document.getElementById("agreeBtnForImageName").style.display = 'none';
 
-   if (namevar != null) {
+      let time;
+
+      time = new Intl.DateTimeFormat('arm-AM', {
+         timeZone: 'Asia/Yerevan',
+         year: 'numeric',
+         month: 'numeric',
+         day: 'numeric',
+      }).format(new Date());
+
       const imageURL = canvas.toDataURL('image/png');
 
       const link = document.createElement('a');
@@ -493,6 +501,26 @@ function install() {
     
       link.click();
    }
+
+   if (namevar == '') {
+      clearTimeout(timeout1);
+      document.getElementById("imageName").style.borderColor = '#ff0000';
+      timeout1 = setTimeout(() => {
+         document.getElementById("imageName").style.borderColor = '#dddddd';
+      }, 1000);
+   }
+}
+
+function cansel() {
+   document.getElementById("imageName").style.display = 'none';
+   document.getElementById("canselBtn").style.display = 'none';
+   document.getElementById("agreeBtnForImageName").style.display = 'none';
+}
+
+function install() {
+   document.getElementById("imageName").style.display = 'block';
+   document.getElementById("canselBtn").style.display = 'block';
+   document.getElementById("agreeBtnForImageName").style.display = 'block';
 }
 
 let file;
