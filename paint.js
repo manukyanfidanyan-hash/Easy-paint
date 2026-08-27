@@ -36,7 +36,7 @@ document.addEventListener("keyup", (e) => {
       document.getElementById("square_square").checked = false;
    }
 });
-
+// --------------------------------------------------------------------------------------------------------------------------------------------------------)
 canvas.addEventListener("mousemove", (e) => {
    cursor.pos.x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
    cursor.pos.y = e.clientY - (window.innerHeight / 2 - canvas.height / 2);
@@ -166,7 +166,140 @@ canvas.addEventListener("mouseup", (e) => {
       square.draw();
    }
 });
+// ------------------------------------------------------------------------------------------------------------------------------------------------------)
+canvas.addEventListener("touchmove", (e) => {
+   let touches = e.touches[0];
 
+   cursor.pos.x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+   cursor.pos.y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+   setTimeout(() => {
+      cursor.pos2.x1 = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      cursor.pos2.y1 = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }, 1);
+
+   if (myLineChecker == true) {
+      linePos2x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos2y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+
+   if (myRetinChecker == true) {
+      retin.pos.x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      retin.pos.y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+   // @ts-ignore
+   if (mySquareChecker == true) {
+      squarePos2x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos2y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+});
+
+document.addEventListener("touchstart", (e) => {
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'pencil') {
+      myDrawChecker = true;
+   }
+});
+
+canvas.addEventListener("touchstart", (e) => {
+   let touches = e.touches[0];
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'line') {
+      myLineChecker = true;
+
+      linePos1x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos1y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      linePos2x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos2y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+      line.draw();
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'retin') {
+      retin.pos.x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      retin.pos.y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+      myRetinChecker = true;
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'square' || document.getElementById("pencil").value == 'square2') {
+      square.radius = 0;
+      mySquareChecker = true;
+
+      squarePos1x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos1y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      squarePos2x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos2y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'square2') {
+      mySquareChecker2 = true;
+   }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'circle' || document.getElementById("pencil").value == 'circle2') {
+      square.radius = 1000000000000;
+      mySquareChecker = true;
+
+      squarePos1x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos1y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      squarePos2x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos2y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'circle2') {
+      mySquareChecker2 = true;
+   }
+
+   // @ts-ignore
+   if (document.getElementById("pencil").value == 'text') {
+      text.pos.x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      text.pos.y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+      text.draw();
+   }
+});
+
+document.addEventListener("touchend", (e) => {
+   setTimeout(() => {
+      myDrawChecker = false;
+      myLineChecker = false;
+      myRetinChecker = false;
+      mySquareChecker = false;
+      mySquareChecker2 = false;
+   }, 1);
+});
+
+canvas.addEventListener("touchend", (e) => {
+   let touches = e.touches[0];
+   if (myLineChecker == true) {
+      linePos1x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos1y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      linePos2x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      linePos2y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+      line.draw();
+   }
+
+   if (mySquareChecker == true) {
+      squarePos1x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos1y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+  
+      squarePos2x = touches.clientX - (window.innerWidth / 2 - canvas.width / 2);
+      squarePos2y = touches.clientY - (window.innerHeight / 2 - canvas.height / 2);
+
+      square.draw();
+   }
+});
+// ------------------------------------------------------------------------------------------------------------------------------------------------------)
 function seeText_and_seeSquareSquare () {
    // @ts-ignore
    if (document.getElementById("pencil").value == 'text') {
