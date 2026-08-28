@@ -80,6 +80,8 @@ option{
    transform: translateX(-100%) translateY(0%);
 
    width: 70px;
+
+   cursor: pointer;
 }
 
 #pencil{
@@ -104,6 +106,8 @@ option{
    top: 0%;
    left: 0%;
    transform: translateX(0%) translateY(0%);
+
+   cursor: pointer;
 }
 
 #text{
@@ -129,6 +133,7 @@ option{
    transform: translateX(-50%) translateY(-50%);
 
    cursor: pointer;
+
    display: none;
 }
 
@@ -148,6 +153,8 @@ option{
    top: 90%;
    left: 50%;
    transform: translateX(-50%) translateY(-50%);
+
+   cursor: pointer;
 }
 
 #imageName{

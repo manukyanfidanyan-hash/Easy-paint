@@ -11,15 +11,15 @@
    
    <canvas></canvas>
 
-   <input id="color" value="#000000" type="color"/>
-   <input id="color2" value="#dddddd" type="color"/>
+   <input id="color" value="#000000" type="color" title="Select color-1"/>
+   <input id="color2" value="#dddddd" type="color" title="Select color-2"/>
 
    <input id="text" type="text" oninput="textF()" onfocus="select()" placeholder="this is for (text)"/>
 
    <h2 id="inpText">100% square or circle</h2>
-   <input id="square_square" type="checkbox"/>
+   <input id="square_square" type="checkbox" title="100% square or circle"/>
 
-   <select name="pencil" id="pencil" onclick="seeText_and_seeSquareSquare ()">
+   <select name="pencil" id="pencil" onclick="seeText_and_seeSquareSquare ()" title="Select tool">
       <option value="pencil">pencil: 🖍</option>
 
       <option value="line">line: —</option>
@@ -41,7 +41,7 @@
 -->
    </select>
 
-   <select name="linewidth" id="lineWidth">
+   <select name="linewidth" id="lineWidth" title="Select line-with">
       <option value="1">Line width: 1</option>
       <option value="2">Line width: 2</option>
       <option value="3">Line width: 3</option>
@@ -57,22 +57,21 @@
       <option value="12">Line width: 12</option>
       <option value="15">Line width: 15</option>
       <option value="20">Line width: 20</option>
-      
    </select>
 
    <input id="imageName" placeholder="Enter image name"/>
 
-   <button id="agreeBtnForImageName" onclick="toHaveImageName()">Enter: ✅</button>
+   <button id="agreeBtnForImageName" onclick="toHaveImageName()" title="Enter image name">Enter: ✅</button>
 
-   <button id="canselBtn" onclick="cansel()">Cansel: ❌</button>
+   <button id="canselBtn" onclick="cansel()" title="Cansel image name">Cansel: ❌</button>
 
-   <button id="FullscreenBtn" onclick="Fullscreen()">Fullscreen: ⛶</button>
+   <button id="FullscreenBtn" onclick="Fullscreen()" title="Fullscreen">Fullscreen: ⛶</button>
 
-   <button onclick="clear1()" id="clearBtn">clean all 🗑</button>
+   <button onclick="clear1()" id="clearBtn" title="Clean all">Clean all 🗑</button>
 
-   <input type="file" accept="image/*" id="addImage"/>
+   <input type="file" accept="image/*" id="addImage" title="Select image: 🖼"/>
 
-   <button onclick="install()" id="saveBtn">Save 📥</button>
+   <button onclick="install()" id="saveBtn" title="Save image">Save 📥</button>
 
 <!-- -CSS & JS- -->
    <link rel="stylesheet" href="paint.css"/>
