@@ -127,7 +127,7 @@ canvas.addEventListener("mousedown", (e) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // @ts-ignore
    if (document.getElementById("pencil").value == 'circle' || document.getElementById("pencil").value == 'circle2') {
-      square.radius = 1000000000000;
+      square.radius = Number.MAX_SAFE_INTEGER;
       mySquareChecker = true;
 
       squarePos1x = e.clientX - (window.innerWidth / 2 - canvas.width / 2);
@@ -389,9 +389,6 @@ class Square {
       c.stroke();
       c.restore();
    }
-   remove () {
-      c.clearRect(this.pos.x, this.pos.y, this.pos2.x - this.pos.x, this.pos2.y - this.pos.y);
-   }
    update () {
       // @ts-ignore
       this.color = document.getElementById("color").value;
@@ -526,6 +523,7 @@ function toHaveImageName() {
    if (toUnderstandSpaces != '') {
       document.getElementById("imageName").style.display = 'none';
       document.getElementById("canselBtn").style.display = 'none';
+      document.getElementById("imageNameBackground").style.display = 'none';
       document.getElementById("agreeBtnForImageName").style.display = 'none';
 
       let time;
@@ -561,12 +559,14 @@ function toHaveImageName() {
 function cansel() {
    document.getElementById("imageName").style.display = 'none';
    document.getElementById("canselBtn").style.display = 'none';
+   document.getElementById("imageNameBackground").style.display = 'none';
    document.getElementById("agreeBtnForImageName").style.display = 'none';
 }
 
 function install() {
    document.getElementById("imageName").style.display = 'block';
    document.getElementById("canselBtn").style.display = 'block';
+   document.getElementById("imageNameBackground").style.display = 'block';
    document.getElementById("agreeBtnForImageName").style.display = 'block';
 }
 
