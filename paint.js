@@ -296,9 +296,11 @@ class Line {
       c.beginPath();
       c.strokeStyle = this.color;
       if (this.circleEnds) {
+         c.save();
          c.lineCap = 'round';
       }
       else{
+         c.save();
          c.lineCap = 'butt';
       }
       c.lineWidth = this.linewidth;
@@ -308,6 +310,7 @@ class Line {
          c.closePath();
       }
       c.stroke();
+      c.restore();
    }
    update () {
 
